@@ -3,7 +3,12 @@
 <!--      <nav-bar></nav-bar>-->
       <Navbar class="home-nav"><div slot="center">购物街</div></Navbar>
 
-      <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
+      <scroll class="content" ref="scroll"
+              :probe-type="3"
+              @scroll="contentScroll"
+              :pull-up-load="true"
+              @pullingUp="loadMore"
+      >
         <home-swiper :banners="banners"/>
         <recommend-view :recommends="recommends"/>
         <feature-view/>
@@ -88,11 +93,18 @@
           // console.log(111)
           // console.log(this.$refs.scroll.message);
           this.$refs.scroll.aa(0,0,2000)
+          // this.$refs.scroll.scroll.scrollTo(0,0)
         },
-
         contentScroll(position){
           // console.log(position);
           this.isShow = (-position.y) > 1000
+        },
+        loadMore(){
+          // console.log(111);
+          this.getHomeGoods(this.currentType)
+
+          // 刷新可视高度
+          this.$refs.scroll.scroll.refresh()
         },
            /** **/
         getHomeMultidata(){
@@ -114,6 +126,8 @@
             // }
             this.goods[type].list.push(...res.data.list)
             this.goods[type].page += 1
+
+            this.$refs.scroll.finishPullUp()
           })
         }
       }

@@ -14,6 +14,10 @@
         probeType: {
           type:Number,
           default:0
+        },
+        pullUpLoad:{
+          type:Boolean,
+          default: false
         }
       },
       data(){
@@ -25,17 +29,29 @@
       mounted() {
           this.scroll = new BScroll(this.$refs.wrapper,{
             click:true,
-            probeType:this.probeType
+            // 是否需要获取位置
+            probeType:this.probeType,
+            // 是否需要监听
+            pullUpLoad:this.pullUpLoad
           })
         //监听滚动的位置
         this.scroll.on("scroll",(position)=>{
           // console.log(position);
           this.$emit("scroll",position)
         })
+        //监听上拉事件
+        this.scroll.on("pullingUp",()=>{
+          // console.log("上啦加载更多");
+          this.$emit("pullingUp")
+        })
+        // this.scroll.scrollTo(0,0,3000)
       },
       methods:{
         aa(x,y,time){
           this.scroll.scrollTo(x,y,time)
+        },
+        finishPullUp(){
+          this.scroll.finishPullUp()
         }
       }
     }
