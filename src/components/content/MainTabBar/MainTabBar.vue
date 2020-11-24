@@ -1,10 +1,12 @@
 <template>
     <tab-bar>
-        <tab-bar-item path = "/home" activeColor="cornflowerblue">
+<!--      这里如果加了：就是需要串字符串进去 所以需要加‘’ -->
+        <tab-bar-item :path = "'/home'" activeColor="cornflowerblue">
             <img slot="item-icon" src="~assets/image/TabBar/ficon01.png" alt="">
             <img slot="item-icon-active" src="~/assets/image/TabBar/icon01.png" alt="">
             <div slot="item-text">首页</div>
         </tab-bar-item>
+<!--      如果前面不是：path而是path就是串字符串进去 所以后面不需要加‘’来变字符串-->
         <tab-bar-item path = "/list" activeColor="cornflowerblue">
             <img slot="item-icon" src="~/assets/image/TabBar/ficon02.png" alt="">
             <img slot="item-icon-active" src="~/assets/image/TabBar/icon02.png" alt="">
@@ -30,7 +32,7 @@
         name: "MainTabBar",
         data(){
             return{
-                categories:""
+                categories:"",
             }
         },
         components:{

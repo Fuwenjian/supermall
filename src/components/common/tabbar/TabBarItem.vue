@@ -16,6 +16,7 @@
                 default:"red"
             }
         },
+      // props:["path"],
         data(){
             return{
                 // isActive:true
@@ -33,7 +34,10 @@
             activeStyle(){
                 return this.isActive?{color:this.activeColor} :{}
             }
-        }
+        },
+      // created() {
+      //     console.log(typeof this.path)
+      // }
     }
 </script>
 
@@ -45,10 +49,15 @@
         font-size: 14px;
     }
     .tab-bar-item img{
-        height: 30px;
-        width: 30px;
-        /*margin-top:3px;*/
-        vertical-align: middle;
+        /*height: 30px;*/
+        /*width: 30px;*/
+        /*!*margin-top:3px;*!*/
+        /*vertical-align: middle;*/
+      width: 24px;
+      height: 24px;
+      margin-top: 3px;
+      vertical-align: middle;
+      margin-bottom: 2px;
     }
 
 </style>
