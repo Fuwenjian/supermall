@@ -2,8 +2,8 @@
     <div id="home">
 <!--      <nav-bar></nav-bar>-->
       <Navbar class="home-nav"><div slot="center">购物街</div></Navbar>
-      <!--      原封不动的就不加： 把她想成字符串，这里是想穿进去数组所以要用：-->
-      <scroll class="content">
+
+      <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
         <home-swiper :banners="banners"/>
         <recommend-view :recommends="recommends"/>
         <feature-view/>
@@ -13,6 +13,10 @@
                      @tabClick="tabClick"/>
         <goods-list  :goods="showGoods"/>
       </scroll>
+
+<!--      组件能不能直接添加单击事件？   不能 需要加.native-->
+<!--      <back-top @click="backTopClick"/>-->
+      <back-top @click.native="backTopClick" v-show="isShow"/>
     </div>
 </template>
 
@@ -24,6 +28,7 @@
     import FeatureView from "./childComps/FeatureView";
     import TabControl from "../../components/content/tabControl/TabControl";
     import GoodsList from "../../components/content/goods/GoodsList";
+    import BackTop from "../../components/content/backTop/BackTop";
 
     // import BScroll from "better-scroll"
     import Scroll from "../../components/common/scroll/Scroll";
@@ -40,7 +45,7 @@
             },
             currentType:"pop",
             scroll:null,
-            // aa:true
+            isShow:false
           }
         },
       computed:{
@@ -49,7 +54,9 @@
         }
       },
         components:{
-          Navbar,HomeSwiper,RecommendView,FeatureView,TabControl,GoodsList,Scroll
+          Navbar,HomeSwiper,RecommendView,
+          FeatureView,TabControl,GoodsList,
+          Scroll,BackTop
         },
         created() {
             this.getHomeMultidata()
@@ -77,6 +84,16 @@
                   break
               }
           },
+        backTopClick(){
+          // console.log(111)
+          // console.log(this.$refs.scroll.message);
+          this.$refs.scroll.aa(0,0,2000)
+        },
+
+        contentScroll(position){
+          // console.log(position);
+          this.isShow = (-position.y) > 1000
+        },
            /** **/
         getHomeMultidata(){
           getHomeMultidata().then(res =>{
@@ -99,18 +116,7 @@
             this.goods[type].page += 1
           })
         }
-      },
-      // mounted() {
-      //   this.scroll = new BScroll(this.$refs.wrapper,{
-      //       pullUpLoad:true
-      //     })
-      //   // this.scroll.on("pullingUp",()=>{
-      //   //   console.log("加载更多");
-      //   // })
-      //   // this.scroll.on("scroll",(position)=>{
-      //   //   console.log(position);
-      //   // })
-      // }
+      }
     }
 </script>
 
