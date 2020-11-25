@@ -95,14 +95,20 @@
     align-items: center;
   }
   .info-services span{
-    font-size: 5px;
     flex: 1;
     display: flex;
     align-items: center;
+    font-size: 5px;
+    white-space: nowrap;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis*/
+  }
+  .info-services span:nth-of-type(3){
+    margin-left: 4px;
   }
   .info-service-item img{
     width: 12px;
     height:12px;
-    margin-right: 5px;
+    margin-right: 2px;
   }
 </style>

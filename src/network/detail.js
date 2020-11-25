@@ -40,3 +40,4 @@ export class GoodsParam {
     this.size = rule.tables
   }
 }
+//这里构造es6构造函数的方法可以见P184的11分钟
