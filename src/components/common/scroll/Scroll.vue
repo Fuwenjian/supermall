@@ -39,20 +39,29 @@
           // console.log(position);
           this.$emit("scroll",position)
         })
+          //调用refresh()来加载更多
+          // this.scroll.refresh()
         //监听上拉事件
-        this.scroll.on("pullingUp",()=>{
-          // console.log("上啦加载更多");
-          this.$emit("pullingUp")
-        })
+
+        if(this.pullUpLoad){
+          this.scroll.on("pullingUp",()=>{
+            console.log("上啦加载更多");
+            this.$emit("pullingUp")
+          })
+        }
         // this.scroll.scrollTo(0,0,3000)
       },
       methods:{
         aa(x,y,time){
-          this.scroll.scrollTo(x,y,time)
+          this.scroll && this.scroll.scrollTo(x,y,time)
+        },
+        refresh(){
+          console.log("---");
+          this.scroll && this.scroll.refresh()
         },
         finishPullUp(){
           this.scroll.finishPullUp()
-        }
+        },
       }
     }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="">
+    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.orgPrice}}</span>
@@ -20,7 +20,15 @@
           }
         }
       },
-        name: "GoodsListItem"
+        name: "GoodsListItem",
+      methods:{
+        imageLoad(){
+          // console.log("imageLoad")
+          //事件总线  this.$bus.$emit("传递出去的函数名字")
+          this.$bus.$emit("itemImageLoad")
+          // console.log(this.$bus);
+        }
+      }
     }
 </script>
 
