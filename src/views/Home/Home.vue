@@ -61,7 +61,8 @@
             scroll:null,
             isShow:false,
             tabOffsetTop:0,
-            isTabFixed:false
+            isTabFixed:false,
+            saveY:0
           }
         },
         computed:{
@@ -82,7 +83,7 @@
             this.getHomeGoods("new")
             this.getHomeGoods("sell")
         },
-      mounted() {
+        mounted() {
          const refresh = debounce(this.$refs.scroll.refresh,200)
         //监听图片照片中item加载完成
         //事件总线  this.$bus.$on("传递出来的函数名字")
@@ -92,7 +93,7 @@
           this.$refs.scroll && refresh()
         })
       },
-      methods:{
+        methods:{
           /**事件监听相关的方法
            */
         tabClick(index){
@@ -108,7 +109,6 @@
                   this.currentType = 'sell'
                   break
               }
-
             this.$refs.tabControl1.currentIndex = index
             this.$refs.tabControl2.currentIndex = index
           },
@@ -165,7 +165,19 @@
             this.$refs.scroll.finishPullUp()
           })
         }
-      }
+      },
+        destroyed() {
+          // console.log("Home destroy")
+        },
+        activated() {
+          // console.log('activated');
+          this.$refs.scroll.aa(0,this.saveY,0)
+          this.$refs.scroll.refresh()
+        },
+        deactivated() {
+          // console.log('deactivated');
+          this.saveY = this.$refs.scroll.getScrollY()
+        }
     }
 </script>
 

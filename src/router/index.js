@@ -5,6 +5,7 @@ const Home = ()=>import("../views/Home/Home")
 const Collection = ()=>import("../views/Collection/Collection")
 const MY = ()=>import("../views/My/MY")
 const List = ()=>import("../views/List/List")
+const Detail =()=>import("../views/Detail/Detail")
 
 
 Vue.use(VueRouter)
@@ -19,16 +20,21 @@ const routes = [
     component:Home
   },
   {
-    path:"/Collection",
+    path:"/collection",
     component:Collection
   },
   {
-    path:"/MY",
+    path:"/my",
     component:MY
   },
   {
-    path:"/List",
+    path:"/list",
     component:List
+  },
+  // 动态路由
+  {
+    path:"/detail/:id",
+    component:Detail
   }
 ]
 

@@ -12,12 +12,12 @@
             <img slot="item-icon-active" src="~/assets/image/TabBar/icon02.png" alt="">
             <div slot="item-text">分类</div>
         </tab-bar-item>
-        <tab-bar-item  path = "/Collection" activeColor="cornflowerblue">
+        <tab-bar-item  path = "/collection" activeColor="cornflowerblue">
             <img slot="item-icon" src="~/assets/image/TabBar/ficon03.png" alt="">
             <img slot="item-icon-active" src="~/assets/image/TabBar/icon03.png" alt="">
             <div slot="item-text">购物车</div>
         </tab-bar-item>
-        <tab-bar-item  path = "/MY" activeColor="cornflowerblue">
+        <tab-bar-item  path = "/my" activeColor="cornflowerblue">
             <img slot="item-icon" src="~/assets/image/TabBar/ficon04.png" alt="">
             <img slot="item-icon-active" src="~/assets/image/TabBar/icon04.png" alt="">
             <div slot="item-text">我的</div>

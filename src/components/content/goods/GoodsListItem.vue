@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="itemClick">
     <img :src="goodsItem.show.img" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
@@ -27,7 +27,23 @@
           //事件总线  this.$bus.$emit("传递出去的函数名字")
           this.$bus.$emit("itemImageLoad")
           // console.log(this.$bus);
-        }
+          // console.log(this.goodsItem.iid);
+        },
+        itemClick(){
+          console.log("跳转到详情页")
+
+          this.$router.push("/detail/"+this.goodsItem.iid)
+
+
+          //这个为什么不行呢？
+          // this.$router.push({
+          //   path:"/Detail",
+          //   query:{
+          //     id: this.goodsItem.iid
+          //   }
+          // })
+
+      }
       }
     }
 </script>
