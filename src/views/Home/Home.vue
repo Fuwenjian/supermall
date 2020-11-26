@@ -45,6 +45,7 @@
 
     import {debounce} from "common/utils"
     import {getHomeMultidata,getHomeGoods} from "../../network/home";
+    import {itemListenerMixin} from "common/mixin"
 
     export default {
         name: "Home",
@@ -62,7 +63,7 @@
             isShow:false,
             tabOffsetTop:0,
             isTabFixed:false,
-            saveY:0
+            saveY:0,
           }
         },
         computed:{
@@ -82,16 +83,22 @@
             this.getHomeGoods("pop")
             this.getHomeGoods("new")
             this.getHomeGoods("sell")
+
         },
+
+        //混入来代替重复内容 区别 类的继承 混入为对象
+        mixins:[itemListenerMixin],
         mounted() {
-         const refresh = debounce(this.$refs.scroll.refresh,200)
-        //监听图片照片中item加载完成
-        //事件总线  this.$bus.$on("传递出来的函数名字")
-        this.$bus.$on("itemImageLoad",()=>{
-          // console.log(1111)
-          // 因为会频繁的做这个刷新操作需要进行防抖处理
-          this.$refs.scroll && refresh()
-        })
+        //  const refresh = debounce(this.$refs.scroll.refresh,200)
+        // //监听图片照片中item加载完成
+        // //事件总线  this.$bus.$on("传递出来的函数名字")
+        //   this.itemImgListener =()=>{
+        //     // console.log(1111)
+        //     // 因为会频繁的做这个刷新操作需要进行防抖处理
+        //     this.$refs.scroll && refresh()
+        //   }
+        //
+        //   this.$bus.$on("itemImageLoad",this.itemImgListener)
       },
         methods:{
           /**事件监听相关的方法
@@ -177,6 +184,7 @@
         deactivated() {
           // console.log('deactivated');
           this.saveY = this.$refs.scroll.getScrollY()
+          this.$bus.$off("itemImageLoad",this.itemImgListener)
         }
     }
 </script>

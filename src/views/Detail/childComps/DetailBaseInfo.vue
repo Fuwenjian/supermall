@@ -100,8 +100,12 @@
     align-items: center;
     font-size: 5px;
     white-space: nowrap;
+    /*溢出不换行*/
     /*overflow: hidden;*/
-    /*text-overflow: ellipsis*/
+    /*超出的文本隐藏*/
+    /*text-overflow: ellipsis;*/
+    /*溢出用省略号显示*/
+
   }
   .info-services span:nth-of-type(3){
     margin-left: 4px;

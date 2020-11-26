@@ -1,9 +1,12 @@
 <template>
   <div class="goods-item" @click="itemClick">
-    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
+    <img :src="showImage" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
-      <span class="price">{{goodsItem.orgPrice}}</span>
+      <span class="price">
+<!--        {{goodsItem.orgPrice}}-->
+        {{price}}
+      </span>
       <i class="iconfont icon-shoucang"></i>
       <span class="collect">{{goodsItem.cfav}}</span>
     </div>
@@ -12,6 +15,7 @@
 
 <script>
     export default {
+      // props:["goodsItem"],
       props:{
         goodsItem:{
           type:Object,
@@ -20,7 +24,7 @@
           }
         }
       },
-        name: "GoodsListItem",
+      name: "GoodsListItem",
       methods:{
         imageLoad(){
           // console.log("imageLoad")
@@ -34,7 +38,6 @@
 
           this.$router.push("/detail/"+this.goodsItem.iid)
 
-
           //这个为什么不行呢？
           // this.$router.push({
           //   path:"/Detail",
@@ -44,6 +47,16 @@
           // })
 
       }
+      },
+      computed:{
+        //这里为什么换个顺序就不行了呢
+        showImage(){
+          return  this.goodsItem.image || this.goodsItem.show.img
+        },
+        price(){
+          return this.goodsItem.orgPrice || '￥'  +this.goodsItem.price
+        }
+
       }
     }
 </script>

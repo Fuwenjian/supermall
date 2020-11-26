@@ -16,6 +16,7 @@
           }
         }
       },
+      // props:["goods"],
         name: "GoodsList",
       components:{
         GoodsListItem

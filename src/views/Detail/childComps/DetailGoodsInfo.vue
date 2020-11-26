@@ -17,7 +17,7 @@
 
 <script>
     export default {
-        name: "DetailGoodsInfo",
+      name: "DetailGoodsInfo",
       props:{
         detailInfo:{
           type:Object,
@@ -32,17 +32,22 @@
             imagesLength:0
           }
       },
-      watch:{
-          //watch监听某一个属性的变化  我们用来监听detaiInfo
-          detaiInfo(){
-            this.imagesLength = this.detailInfo.detailImage[0].list.length
-          }
-      },
+      // watch:{
+      //     //watch监听某一个属性的变化  我们用来监听detaiInfo
+      //     detaiInfo(){
+      //       this.imagesLength = this.detailInfo.detailImage[0].list.length
+      //     }
+      // },
       methods:{
           imgLoad(){
             // this.counter +=1
+            // console.log(this.detailInfo);
+            // this.$emit("imageLoad")
             //先加在对比
-            if (++this.counter == this.imagesLength){
+            // console.log(this.imagesLength);
+            // console.log(this.detailInfo.detailImage[0].list.length);
+            if (++this.counter == this.detailInfo.detailImage[0].list.length){
+              console.log("图片加载完了");
               this.$emit("imageLoad")
             }
           }

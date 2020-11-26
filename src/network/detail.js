@@ -8,7 +8,11 @@ export function getDetail(iid) {
     }
   })
 }
-
+export function getRecommend() {
+  return request({
+    url:"/recommend"
+  })
+}
 export class GoodInfo {
   constructor(itemInfo,columns,services) {
     this.title = itemInfo.title
@@ -41,3 +45,5 @@ export class GoodsParam {
   }
 }
 //这里构造es6构造函数的方法可以见P184的11分钟
+
+
