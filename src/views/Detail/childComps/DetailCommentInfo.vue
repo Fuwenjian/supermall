@@ -75,6 +75,7 @@
     color: var(--color-high-text);
     margin: 10px 0;
     font-size: 15px;
+    line-height: 23px;
   }
   .info-other{
     /*padding: 0 10px;*/

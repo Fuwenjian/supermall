@@ -40,12 +40,11 @@
     import FeatureView from "./childComps/FeatureView";
     import TabControl from "../../components/content/tabControl/TabControl";
     import GoodsList from "../../components/content/goods/GoodsList";
-    import BackTop from "../../components/content/backTop/BackTop";
     import Scroll from "../../components/common/scroll/Scroll";
 
     import {debounce} from "common/utils"
     import {getHomeMultidata,getHomeGoods} from "../../network/home";
-    import {itemListenerMixin} from "common/mixin"
+    import {itemListenerMixin,backTopMixin} from "common/mixin"
 
     export default {
         name: "Home",
@@ -60,7 +59,7 @@
             },
             currentType:"pop",
             scroll:null,
-            isShow:false,
+            // isShow:false,
             tabOffsetTop:0,
             isTabFixed:false,
             saveY:0,
@@ -74,7 +73,7 @@
         components:{
           Navbar,HomeSwiper,RecommendView,
           FeatureView,TabControl,GoodsList,
-          Scroll,BackTop
+          Scroll
         },
         created() {
             //请求所有数据
@@ -87,7 +86,7 @@
         },
 
         //混入来代替重复内容 区别 类的继承 混入为对象
-        mixins:[itemListenerMixin],
+        mixins:[itemListenerMixin,backTopMixin],
         mounted() {
           // console.log(this.$refs.scroll);
 
@@ -121,12 +120,13 @@
             this.$refs.tabControl1.currentIndex = index
             this.$refs.tabControl2.currentIndex = index
           },
-        backTopClick(){
-          // console.log(111)
-          // console.log(this.$refs.scroll.message);
-          this.$refs.scroll.aa(0,0,2000)
-          // this.$refs.scroll.scroll.scrollTo(0,0)
-        },
+
+        // backTopClick(){
+        //   // console.log(111)
+        //   // console.log(this.$refs.scroll.message);
+        //   this.$refs.scroll.aa(0,0,2000)
+        //   // this.$refs.scroll.scroll.scrollTo(0,0)
+        // },
         contentScroll(position){
           this.$nextTick()
           // console.log(position);
@@ -137,7 +137,6 @@
         },
         loadMore(){
           this.getHomeGoods(this.currentType)
-          //
           // // 刷新可视高度
           // this.$refs.scroll.scroll.refresh()
           this.$refs.scroll.refresh()
