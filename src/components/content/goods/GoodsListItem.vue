@@ -34,7 +34,8 @@
           // console.log(this.goodsItem.iid);
         },
         itemClick(){
-          console.log("跳转到详情页")
+
+          // console.log("跳转到详情页")
 
           this.$router.push("/detail/"+this.goodsItem.iid)
 
@@ -51,7 +52,11 @@
       computed:{
         //这里为什么换个顺序就不行了呢
         showImage(){
-          return  this.goodsItem.image || this.goodsItem.show.img
+
+          return this.goodsItem.show?this.goodsItem.show.img:this.goodsItem.image
+          // return this.goodsItem.image?this.goodsItem.image:this.goodsItem.show.img
+
+          // return  this.goodsItem.image || this.goodsItem.show.img
         },
         price(){
           return this.goodsItem.orgPrice || '￥'  +this.goodsItem.price

@@ -1,15 +1,17 @@
 <template>
   <div id="detail">
-    <detail-nav-bar class="nav-aa"></detail-nav-bar>
-    <scroll class="content" ref="scroll">
+<!--    :current-index="currentIndex" @change="change"-->
+    <detail-nav-bar class="nav-aa" @titleClick="titleClick" ref="nav" ></detail-nav-bar>
+    <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
       <detail-swipper :top-images="TopImages"></detail-swipper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shop"></detail-shop-info>
-      <detail-goods-info :detail-info="detailInfo" ></detail-goods-info>
-      <detail-pramas-info :param-info="paramInfo"></detail-pramas-info>
-      <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
-      <goods-list :goods="recommends"></goods-list>
-<!--      @imageLoad="imageLoad"-->
+      <detail-goods-info :detail-info="detailInfo"  @imageLoad="imageLoad"></detail-goods-info>
+
+      <detail-pramas-info :param-info="paramInfo" ref="pramas"></detail-pramas-info>
+      <detail-comment-info :comment-info="commentInfo" ref="comment"></detail-comment-info>
+
+      <goods-list :goods="recommends" ref="goods"></goods-list>
     </scroll>
   </div>
 </template>
@@ -40,7 +42,9 @@
             detailInfo:{},
             paramInfo:{},
             commentInfo:{},
-            recommends:[]
+            recommends:[],
+            themeTopYs:[],
+            currentIndex :0
           }
       },
       created() {
@@ -71,19 +75,64 @@
         getRecommend().then(res=>{
           // console.log(res);
           this.recommends = res.data.list
-          console.log(this.recommends);
+          // console.log(this.recommends);
         })
       },
       components:{
         DetailNavBar,DetailSwipper,DetailBaseInfo,DetailShopInfo,Scroll,
         DetailGoodsInfo,DetailPramasInfo,DetailCommentInfo,GoodsList
       },
-     // methods:{
-     //   imageLoad(){
-     //     this.$refs.scroll1.refresh()
-     //     console.log("主页加载")
-     //   }
-     // },
+     methods:{
+       // change(aa){
+       //   this.currentIndex = aa
+       // },
+       imageLoad(){
+         this.$refs.scroll.refresh()
+         console.log("主页加载")
+         // this.$nextTick(()=>{
+         //   this.themeTopYs = []
+         //   this.themeTopYs.push(0)
+         //   this.themeTopYs.push(this.$refs.pramas.$el.offsetTop)
+         //   this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+         //   this.themeTopYs.push(this.$refs.goods.$el.offsetTop)
+         //   console.log(this.themeTopYs);
+         // })
+         this.themeTopYs = []
+         this.themeTopYs.push(0)
+         this.themeTopYs.push(this.$refs.pramas.$el.offsetTop)
+         this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
+         this.themeTopYs.push(this.$refs.goods.$el.offsetTop)
+         console.log(this.themeTopYs);
+       },
+       titleClick(index) {
+         console.log(index);
+         this.$refs.scroll.aa(0,-this.themeTopYs[index],1000)
+       },
+       contentScroll(position){
+         const positionY = -position.y
+         // for (let i in this.themeTopYs) {
+         //   //这样出来的i是一个String
+         //   // console.log(i + 1);
+         //   //parseInt(i)转化成Number
+         //   if (positionY > this.themeTopYs[parseInt(i)] && positionY<this.themeTopYs[parseInt(i)+1]){
+         //     console.log(i);
+         //   }
+         // }
+         for (let i = 0; i <this.themeTopYs.length ; i++) {
+           let length = this.themeTopYs.length
+           // console.log(i);
+           //最后一个给不到
+           // if(positionY > this.themeTopYs[i] && positionY<this.themeTopYs[i+1]){
+           //   // console.log(i);
+           // }
+           if(this.currentIndex !== i && (( i< length-1 && positionY >= this.themeTopYs[i] && positionY<this.themeTopYs[i+1])||(i === length-1)&& positionY >= this.themeTopYs[i])){
+             console.log(i)
+             this.currentIndex = i
+             this.$refs.nav.currentIndex = this.currentIndex
+           }
+         }
+       }
+     },
       mixins:[itemListenerMixin],
       mounted() {
         // const refresh = debounce(this.$refs.scroll1.refresh,200)

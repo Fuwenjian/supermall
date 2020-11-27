@@ -66,7 +66,7 @@
             saveY:0,
           }
         },
-        computed:{
+      computed:{
         showGoods(){
           return this.goods[this.currentType].list
         }
@@ -83,13 +83,15 @@
             this.getHomeGoods("pop")
             this.getHomeGoods("new")
             this.getHomeGoods("sell")
-
+          // console.log(this)
         },
 
         //混入来代替重复内容 区别 类的继承 混入为对象
         mixins:[itemListenerMixin],
         mounted() {
-        //  const refresh = debounce(this.$refs.scroll.refresh,200)
+          // console.log(this.$refs.scroll);
+
+          //  const refresh = debounce(this.$refs.scroll.refresh,200)
         // //监听图片照片中item加载完成
         // //事件总线  this.$bus.$on("传递出来的函数名字")
         //   this.itemImgListener =()=>{
@@ -126,6 +128,7 @@
           // this.$refs.scroll.scroll.scrollTo(0,0)
         },
         contentScroll(position){
+          this.$nextTick()
           // console.log(position);
           //判断BackTop是否显示
           this.isShow = (-position.y) > 1000
@@ -137,6 +140,7 @@
           //
           // // 刷新可视高度
           // this.$refs.scroll.scroll.refresh()
+          this.$refs.scroll.refresh()
         },
         swipperImageLoad(){
           // 组件对象没有offsetTop，但是组件对应的模板(元素)拥有
@@ -168,7 +172,7 @@
             // }
             this.goods[type].list.push(...res.data.list)
             this.goods[type].page += 1
-
+            // console.log(this.goods);
             this.$refs.scroll.finishPullUp()
           })
         }
@@ -185,7 +189,7 @@
           // console.log('deactivated');
           this.saveY = this.$refs.scroll.getScrollY()
           this.$bus.$off("itemImageLoad",this.itemImgListener)
-        }
+        },
     }
 </script>
 

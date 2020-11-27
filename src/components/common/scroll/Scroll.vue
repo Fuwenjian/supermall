@@ -42,7 +42,6 @@
           //调用refresh()来加载更多
           // this.scroll.refresh()
         //监听上拉事件
-
         if(this.pullUpLoad){
           this.scroll.on("pullingUp",()=>{
             console.log("上啦加载更多");
@@ -56,7 +55,7 @@
           this.scroll && this.scroll.scrollTo(x,y,time)
         },
         refresh(){
-          console.log("---");
+          // console.log("---");
           this.scroll && this.scroll.refresh()
         },
         finishPullUp(){

@@ -19,6 +19,14 @@
   import Navbar from "../../../components/common/navbar/Navbar";
     export default {
       name: "DetailNavBar",
+      // props:{
+      //   currentIndex:{
+      //     type:Number,
+      //     default(){
+      //       return "0"
+      //     }
+      //   }
+      // },
       data(){
         return{
           titles:["商品","参数","评论","推荐"],
@@ -30,7 +38,9 @@
       },
       methods:{
         titleClick(index){
-          this.currentIndex = index
+          this.currentIndex= index
+          this.$emit("titleClick",index)
+          // this.$emit("change",this.currentIndex)
         },
         backClick(){
           // this.$router.go(-1)
