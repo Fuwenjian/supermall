@@ -16,6 +16,8 @@
     <detail-bottom-bar @eddCart="eddCart"></detail-bottom-bar>
 
     <back-top @click.native="backTopClick" v-show="isShow"/>
+<!--    <toast :message="message" :show="show"></toast>-->
+
   </div>
 </template>
 
@@ -34,6 +36,10 @@
   import Scroll from "../../components/common/scroll/Scroll";
   import {debounce} from "../../common/utils";
   import {itemListenerMixin,backTopMixin} from "common/mixin"
+  import Toast from "../../components/common/toast/Toast";
+
+  import {mapActions} from "vuex"
+
 
   export default {
       name: "Detail",
@@ -49,6 +55,8 @@
             recommends:[],
             themeTopYs:[],
             currentIndex :0,
+            // message:"",
+            // show:false
             // isShow:false
           }
       },
@@ -87,8 +95,10 @@
       components:{
         DetailNavBar,DetailSwipper,DetailBaseInfo,DetailShopInfo,Scroll,
         DetailGoodsInfo,DetailPramasInfo,DetailCommentInfo,GoodsList,DetailBottomBar,
+        Toast
       },
      methods:{
+        ...mapActions(["addCart"]),
        // change(aa){
        //   this.currentIndex = aa
        // },
@@ -158,7 +168,7 @@
          }
        },
        eddCart(){
-         console.log("加入购物车成功");
+         // console.log("加入购物车成功");
          //1.获取商品信息（购物车里面需要的）
          const product = {}
          product.img = this.TopImages[0]
@@ -169,7 +179,27 @@
          product.iid = this.iid
          //2.将商品数据保存到购物车
          // this.$store.commit("addCart",product)
-         this.$store.dispatch("addCart",product)
+
+         // this.$store.dispatch("addCart",product).then(res =>{
+         //   console.log(res)
+         // })
+         this.addCart(product).then(res =>{
+           // console.log(res);
+           console.log(res);
+           // this.message = res
+           // this.show = true
+           this.$toast.show(res,2000)
+           // console.log(this.$toast)
+         }).catch(err=>{
+           console.log(err);
+           // this.message = err
+           // this.show = true
+           this.$toast.show(err,2000)
+         })
+
+
+         // console.log(product);
+         // this.$toast.show("购物车成功+1",2000)
        }
      },
       mixins:[itemListenerMixin,backTopMixin],

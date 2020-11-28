@@ -10,17 +10,17 @@
         <cart-list></cart-list>
       </scroll>
       <cart-bottom></cart-bottom>
+
     </div>
 </template>
 
-<script>1
+<script>
   import Navbar from "../../components/common/navbar/Navbar";
   import {mapGetters} from "vuex"
   import CartList from "./childComps/CartList";
   import CartBottom from "./childComps/CartBottom";
 
   import Scroll from "../../components/common/scroll/Scroll";
-
   // mapGetters仅仅是将store中的getter映射到局部计算属性(局部的意思是再哪里用那个局部就是哪里)
     export default {
       name: "Collection",

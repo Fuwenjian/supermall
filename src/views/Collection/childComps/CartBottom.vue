@@ -8,7 +8,7 @@
       合计:{{totlePrice}}
     </div>
 
-    <div class="caculate">
+    <div class="caculate" @click="calcClick">
         去结算:{{checkLength}}
     </div>
   </div>
@@ -58,6 +58,12 @@
           }else {
             this.cartList.forEach(item =>item.checked = true)
           }
+        },
+        calcClick(){
+          if(!this.isSelectAll){
+            this.$toast.show("请选择购买的商品",2000)
+          }
+
         }
       }
     }
