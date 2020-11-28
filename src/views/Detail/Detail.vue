@@ -36,7 +36,7 @@
   import {itemListenerMixin,backTopMixin} from "common/mixin"
 
   export default {
-        name: "Detail",
+      name: "Detail",
       data(){
           return{
             iid:null,
@@ -158,7 +158,7 @@
          }
        },
        eddCart(){
-         console.log("购物车主页");
+         console.log("加入购物车成功");
          //1.获取商品信息（购物车里面需要的）
          const product = {}
          product.img = this.TopImages[0]

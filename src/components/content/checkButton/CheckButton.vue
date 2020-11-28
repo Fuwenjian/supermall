@@ -6,13 +6,13 @@
 
 <script>
     export default {
-        name: "CheckButton",
+      name: "CheckButton",
       props:{
           isChecked:{
             type:Boolean,
             default : false
           }
-      }
+      },
     }
 </script>
 

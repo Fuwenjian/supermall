@@ -28,7 +28,7 @@
       name: "DetailBottomBar",
       methods:{
         addToCart(){
-          console.log(11);
+          // console.log(11);
           this.$emit("eddCart")
         }
       }

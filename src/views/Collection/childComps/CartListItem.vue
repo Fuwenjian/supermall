@@ -3,9 +3,11 @@
       <div class="item-selector">
         <check-button :is-checked="product.checked" @click.native="checkClick"/>
       </div>
+
       <div class="item-img">
         <img :src="product.img" alt="商品图片">
       </div>
+
       <div class="item-info">
         <div class="item-title">{{product.title}}</div>
         <div class="item-desc">{{product.desc}}</div>
@@ -14,6 +16,7 @@
           <div class="item-count right">×{{product.count}}</div>
         </div>
       </div>
+
     </div>
 
 </template>
@@ -36,13 +39,17 @@
       methods:{
         checkClick(){
           this.product.checked = !this.product.checked
-        }
+        },
+        // aa(){
+        //   this.$bus.$emit("aaa")
+        // }
       }
     }
 </script>
 
 <style scoped>
   #shop-item{
+    height: 100%;
     width: 100%;
     display: flex;
     font-size: 0;

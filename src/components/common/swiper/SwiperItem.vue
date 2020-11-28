@@ -1,7 +1,7 @@
 <template>
-  <div class="slide">
-    <slot></slot>
-  </div>
+    <div class="slide">
+      <slot></slot>
+    </div>
 </template>
 
 <script>
@@ -11,7 +11,6 @@
 </script>
 
 <style scoped>
-
   .slide {
     width: 100%;
     flex-shrink: 0;
